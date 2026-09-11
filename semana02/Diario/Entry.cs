@@ -20,8 +20,7 @@ namespace JournalApp
         public void Display()
         {
             Console.WriteLine($"Data: {Date} - Pergunta: {PromptText}");
-            Console.WriteLine($"Resposta: {EntryText}");
-            Console.WriteLine(new string('-', 40));
+            Console.WriteLine($"Resposta: {EntryText}\n");
         }
     }
 }

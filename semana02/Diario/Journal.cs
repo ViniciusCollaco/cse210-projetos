@@ -7,9 +7,8 @@ namespace JournalApp
 {
     public class Journal
     {
-        public List<Entry> Entries { get; set; } = new List<Entry>();
-
-        private readonly List<string> _prompts = new List<string>
+        private List<Entry> _entries = new List<Entry>();
+        private List<string> _prompts = new List<string>
         {
             "Quem foi a pessoa mais interessante com quem interagi hoje?",
             "Qual foi a melhor parte do meu dia?",
@@ -19,29 +18,32 @@ namespace JournalApp
             "Que aprendizado novo ou insight eu tive hoje?",
             "Pelo que sou grato no dia de hoje?"
         };
-
+        private Random _random = new Random();
+        public List<Entry> Entries
+        {
+            get { return _entries; }
+            set { _entries = value; }
+        }
         public string GetRandomPrompt()
         {
-            Random random = new Random();
-            int index = random.Next(_prompts.Count);
+            int index = _random.Next(_prompts.Count);
             return _prompts[index];
         }
-
         public void AddEntry(Entry newEntry)
         {
-            Entries.Add(newEntry);
+            _entries.Add(newEntry);
         }
 
         public void DisplayAll()
         {
-            if (Entries.Count == 0)
+            if (_entries.Count == 0)
             {
                 Console.WriteLine("\nO diário está vazio.");
                 return;
             }
 
             Console.WriteLine("\n--- REGISTROS DO DIÁRIO ---");
-            foreach (Entry entry in Entries)
+            foreach (Entry entry in _entries)
             {
                 entry.Display();
             }
@@ -52,7 +54,7 @@ namespace JournalApp
             try
             {
                 var options = new JsonSerializerOptions { WriteIndented = true };
-                string jsonString = JsonSerializer.Serialize(Entries, options);
+                string jsonString = JsonSerializer.Serialize(_entries, options);
                 File.WriteAllText(file, jsonString);
                 Console.WriteLine($"Diário salvo com sucesso no arquivo '{file}'.");
             }
@@ -77,7 +79,7 @@ namespace JournalApp
 
                 if (loadedEntries != null)
                 {
-                    Entries = loadedEntries;
+                    _entries = loadedEntries;
                     Console.WriteLine($"Diário carregado com sucesso do arquivo '{file}'.");
                 }
             }

@@ -1,7 +1,8 @@
-// Implementei a persistência de dados utilizando o formato JSON
-// (através da biblioteca System.Text.Json).
-// Isso resolve o problema de lidar com caracteres especiais como vírgulas, quebras de linha e aspas no texto digitado pelo usuário,
-// garantindo um salvamento e carregamento robusto dos registros sem corromper a estrutura do arquivo.
+// EXCEDENDO OS REQUISITOS:
+// Para ir além dos requisitos, implementei a persistência de dados 
+// utilizando o formato JSON através do repositório de suporte 'System.Text.Json'.
+// Essa abordagem resolve completamente o desafio de formatação e limpeza de caracteres especiais (como aspas, 
+// vírgulas e quebras de linha que o usuário digite), eliminando falhas na leitura ou corrupção na estrutura do arquivo.
 
 using System;
 
