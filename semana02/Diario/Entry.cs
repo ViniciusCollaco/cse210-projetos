@@ -1,26 +1,27 @@
 using System;
+using System.Text.Json.Serialization;
 
 namespace JournalApp
 {
     public class Entry
     {
-        public string Date { get; set; }
-        public string PromptText { get; set; }
-        public string EntryText { get; set; }
+        public string _date;
+        public string _promptText;
+        public string _entryText;
 
         public Entry() { }
 
         public Entry(string date, string promptText, string entryText)
         {
-            Date = date;
-            PromptText = promptText;
-            EntryText = entryText;
+            _date = date;
+            _promptText = promptText;
+            _entryText = entryText;
         }
 
         public void Display()
         {
-            Console.WriteLine($"Data: {Date} - Pergunta: {PromptText}");
-            Console.WriteLine($"Resposta: {EntryText}\n");
+            Console.WriteLine($"Data: {_date} - Pergunta: {_promptText}");
+            Console.WriteLine($"Resposta: {_entryText}\n");
         }
     }
 }
