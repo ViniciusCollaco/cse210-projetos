@@ -26,20 +26,20 @@ class Program
         listaVideos.Add(video3);
 
         Console.WriteLine("==================================================");
-        Console.WriteLine("        RELATÓRIO DE VÍDEOS DO YOUTUBE           ");
+        Console.WriteLine("         RELATÓRIO DE VÍDEOS DO YOUTUBE           ");
         Console.WriteLine("==================================================\n");
 
         foreach (Video video in listaVideos)
         {
-            Console.WriteLine($"Título: {video.Titulo}");
-            Console.WriteLine($"Autor: {video.Autor}");
-            Console.WriteLine($"Duração: {video.DuracaoSegundos} segundos");
+            Console.WriteLine($"Título: {video.GetTitulo()}");
+            Console.WriteLine($"Autor: {video.GetAutor()}");
+            Console.WriteLine($"Duração: {video.GetDuracaoSegundos()} segundos");
             Console.WriteLine($"Total de Comentários: {video.ObterNumeroComentarios()}");
             Console.WriteLine("Comentários:");
 
-            foreach (Comentario comentario in video.Comentarios)
+            foreach (Comentario comentario in video.GetComentarios())
             {
-                Console.WriteLine($"  - {comentario.NomePessoa}: \"{comentario.Texto}\"");
+                Console.WriteLine($"  - {comentario.GetNomePessoa()}: \"{comentario.GetTexto()}\"");
             }
 
             Console.WriteLine("\n--------------------------------------------------\n");

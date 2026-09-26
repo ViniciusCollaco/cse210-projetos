@@ -2,12 +2,22 @@ using System;
 
 public class Comentario
 {
-    public string NomePessoa { get; set; }
-    public string Texto { get; set; }
-    
+    private string _nomePessoa;
+    private string _texto;
+
     public Comentario(string nomePessoa, string texto)
     {
-        NomePessoa = nomePessoa;
-        Texto = texto;
+        _nomePessoa = nomePessoa;
+        _texto = texto;
+    }
+
+    public string GetNomePessoa()
+    {
+        return _nomePessoa;
+    }
+
+    public string GetTexto()
+    {
+        return _texto;
     }
 }
