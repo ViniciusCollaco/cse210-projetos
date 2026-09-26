@@ -21,6 +21,7 @@ class Program
 
         ExibirDetalhesPedido("PEDIDO #1 (Nacional - EUA)", pedido1);
         Console.WriteLine("\n==================================================\n");
+        
         ExibirDetalhesPedido("PEDIDO #2 (Internacional - Brasil)", pedido2);
     }
 

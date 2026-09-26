@@ -12,10 +12,14 @@ public class Cliente
     }
 
     public string GetNome() => _nome;
-    public Endereco GetEndereco() => _endereco;
 
     public bool MoraNosEUA()
     {
         return _endereco.EhEUA();
+    }
+
+    public string ObterEnderecoCompleto()
+    {
+        return _endereco.ObterEnderecoFormatado();
     }
 }

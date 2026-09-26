@@ -46,7 +46,7 @@ public class Pedido
         StringBuilder sb = new StringBuilder();
         sb.AppendLine("--- ETIQUETA DE ENVIO ---");
         sb.AppendLine($"Cliente: {_cliente.GetNome()}");
-        sb.AppendLine(_cliente.GetEndereco().ObterEnderecoFormatado());
+        sb.AppendLine(_cliente.ObterEnderecoCompleto());
         return sb.ToString();
     }
 }
