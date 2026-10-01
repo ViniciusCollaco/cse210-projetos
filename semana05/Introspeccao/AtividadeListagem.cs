@@ -33,20 +33,49 @@ public class AtividadeListagem : Atividade
 
         List<string> itens = new List<string>();
         DateTime tempoInicio = DateTime.Now;
-        DateTime tempoFim = tempoInicio.AddSeconds(GetDuracao());
+        DateTime tempoFim = tempoInicio.AddSeconds(ObterDuracao());
 
         while (DateTime.Now < tempoFim)
         {
             Console.Write("> ");
+            string entrada = LerLinhaComTempoLimite(tempoFim);
             
-            string entrada = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(entrada))
             {
                 itens.Add(entrada);
             }
         }
 
-        Console.WriteLine($"Você listou {itens.Count} itens!");
+        Console.WriteLine($"\nVocê listou {itens.Count} itens!");
         ExibirMensagemFinal();
+    }
+
+    private string LerLinhaComTempoLimite(DateTime tempoFim)
+    {
+        string entrada = "";
+        while (DateTime.Now < tempoFim)
+        {
+            if (Console.KeyAvailable)
+            {
+                ConsoleKeyInfo key = Console.ReadKey(intercept: false);
+                if (key.Key == ConsoleKey.Enter)
+                {
+                    return entrada;
+                }
+                else if (key.Key == ConsoleKey.Backspace)
+                {
+                    if (entrada.Length > 0)
+                    {
+                        entrada = entrada.Substring(0, entrada.Length - 1);
+                    }
+                }
+                else
+                {
+                    entrada += key.KeyChar;
+                }
+            }
+            System.Threading.Thread.Sleep(50);
+        }
+        return entrada;
     }
 }

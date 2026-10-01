@@ -14,7 +14,7 @@ public class Atividade
         _descricao = descricao;
     }
 
-    public int GetDuracao()
+    public int ObterDuracao()
     {
         return _duracao;
     }
@@ -25,7 +25,11 @@ public class Atividade
         Console.WriteLine($"Bem-vindo à {_nome}.\n");
         Console.WriteLine(_descricao + "\n");
         Console.Write("Por quantos segundos, aproximadamente, você gostaria que durasse sua sessão? ");
-        _duracao = int.Parse(Console.ReadLine());
+        
+        if (!int.TryParse(Console.ReadLine(), out _duracao))
+        {
+            _duracao = 30; 
+        }
 
         Console.Clear();
         Console.WriteLine("Prepare-se...");
@@ -60,9 +64,14 @@ public class Atividade
     {
         for (int i = segundos; i > 0; i--)
         {
-            Console.Write(i);
+            string textoNumero = i.ToString();
+            Console.Write(textoNumero);
             Thread.Sleep(1000);
-            Console.Write("\b \b");
+
+            for (int j = 0; j < textoNumero.Length; j++)
+            {
+                Console.Write("\b \b");
+            }
         }
     }
 }

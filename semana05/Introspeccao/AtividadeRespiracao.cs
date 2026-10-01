@@ -12,13 +12,16 @@ public class AtividadeRespiracao : Atividade
         ExibirMensagemInicial();
 
         DateTime tempoInicio = DateTime.Now;
-        DateTime tempoFim = tempoInicio.AddSeconds(GetDuracao());
+        DateTime tempoFim = tempoInicio.AddSeconds(ObterDuracao());
 
         while (DateTime.Now < tempoFim)
         {
             Console.Write("\nInspire...");
             ExibirContagemRegressiva(4);
             Console.WriteLine();
+
+            if (DateTime.Now >= tempoFim)
+                break;
 
             Console.Write("Expire...");
             ExibirContagemRegressiva(6);

@@ -1,5 +1,5 @@
-// Implementação de um sistema que garante que nenhuma pergunta ou prompt aleatório 
-// seja repetido na classe AtividadeReflexao, até que todos os itens tenham sido exibidos ao menos uma vez.
+//Implementado um sistema de controle de memória na classe AtividadeReflexao que garante 
+// que nenhum prompt ou pergunta seja repetido até que todos os itens da lista tenham sido exibidos.
 
 using System;
 

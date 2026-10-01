@@ -51,7 +51,7 @@ public class AtividadeReflexao : Atividade
         Console.Clear();
 
         DateTime tempoInicio = DateTime.Now;
-        DateTime tempoFim = tempoInicio.AddSeconds(GetDuracao());
+        DateTime tempoFim = tempoInicio.AddSeconds(ObterDuracao());
 
         while (DateTime.Now < tempoFim)
         {
