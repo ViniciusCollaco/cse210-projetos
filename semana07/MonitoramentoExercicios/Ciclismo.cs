@@ -19,5 +19,10 @@ namespace MonitoramentoExercicios
         {
             return _velocidadeKmh;
         }
+
+        public override double ObterRitmo()
+        {
+            return ObterDuracaoMinutos() / ObterDistancia();
+        }
     }
 }

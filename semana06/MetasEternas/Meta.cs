@@ -4,9 +4,9 @@ namespace MetasEternas
     {
         private string _nome;
         private string _descricao;
-        private string _pontos;
+        private int _pontos;
 
-        public Meta(string nome, string descricao, string pontos)
+        public Meta(string nome, string descricao, int pontos)
         {
             _nome = nome;
             _descricao = descricao;
@@ -15,7 +15,7 @@ namespace MetasEternas
 
         public string ObterNome() => _nome;
         public string ObterDescricao() => _descricao;
-        public int ObterValorPontos() => int.Parse(_pontos);
+        public int ObterValorPontos() => _pontos;
 
         public abstract int RegistrarEvento();
         public abstract bool EstaConcluida();

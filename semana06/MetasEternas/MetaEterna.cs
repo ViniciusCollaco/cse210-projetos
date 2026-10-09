@@ -2,7 +2,7 @@ namespace MetasEternas
 {
     public class MetaEterna : Meta
     {
-        public MetaEterna(string nome, string descricao, string pontos) : base(nome, descricao, pontos) { }
+        public MetaEterna(string nome, string descricao, int pontos) : base(nome, descricao, pontos) { }
 
         public override int RegistrarEvento()
         {

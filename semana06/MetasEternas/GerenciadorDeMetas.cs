@@ -45,6 +45,9 @@ namespace MetasEternas
         public void ExibirInfoJogador()
         {
             int nivel = (_pontos / 1000) + 1;
+            int pontosNoNivelAtual = _pontos % 1000;
+            int progressoBarra = pontosNoNivelAtual / 100;
+
             string titulo = nivel switch
             {
                 1 => "Iniciante das Metas",
@@ -54,7 +57,12 @@ namespace MetasEternas
                 _ => "Unicórnio Ninja Épico"
             };
 
-            Console.WriteLine($"\n*** Você tem {_pontos} pontos! | Nível {nivel}: {titulo} ***");
+            string barra = new string('█', progressoBarra) + new string('.', 10 - progressoBarra);
+
+            Console.WriteLine($"\n========================================================");
+            Console.WriteLine($"*** Pontuação Total: {_pontos} pts | Nível {nivel}: {titulo} ***");
+            Console.WriteLine($"Progresso do Nível {nivel}: [{barra}] ({pontosNoNivelAtual}/1000 pts)");
+            Console.WriteLine($"========================================================");
         }
 
         public void ListarNomesDasMetas()
@@ -94,7 +102,7 @@ namespace MetasEternas
             Console.Write("Qual é uma curta descrição dela? ");
             string descricao = Console.ReadLine();
             Console.Write("Qual é a quantidade de pontos associada a esta meta? ");
-            string pontos = Console.ReadLine();
+            int pontos = int.Parse(Console.ReadLine());
 
             switch (tipo)
             {
@@ -112,10 +120,17 @@ namespace MetasEternas
                     _metas.Add(new MetaDeListaDeTarefas(nome, descricao, pontos, total, bonus));
                     break;
             }
+            Console.WriteLine("Meta criada com sucesso!");
         }
 
         public void RegistrarEvento()
         {
+            if (_metas.Count == 0)
+            {
+                Console.WriteLine("\nNenhuma meta cadastrada para registrar eventos.");
+                return;
+            }
+
             Console.WriteLine("\nSuas metas são:");
             ListarNomesDasMetas();
             Console.Write("Qual meta você realizou? ");
@@ -123,10 +138,23 @@ namespace MetasEternas
 
             if (indice >= 0 && indice < _metas.Count)
             {
-                int pontosGanhos = _metas[indice].RegistrarEvento();
+                Meta metaSelecionada = _metas[indice];
+
+                if (metaSelecionada.EstaConcluida())
+                {
+                    Console.WriteLine("\n[AVISO] Esta meta já foi completamente concluída! Nenhum ponto adicional foi concedido.");
+                    return;
+                }
+
+                int pontosGanhos = metaSelecionada.RegistrarEvento();
                 _pontos += pontosGanhos;
-                Console.WriteLine($"Parabéns! Você ganhou {pontosGanhos} pontos!");
-                Console.WriteLine($"Você agora tem {_pontos} pontos.");
+
+                Console.WriteLine($"\n🎉 PARABÉNS! Você ganhou {pontosGanhos} pontos!");
+                Console.WriteLine($"Você agora tem {_pontos} pontos acumulados.");
+            }
+            else
+            {
+                Console.WriteLine("Opção de meta inválida.");
             }
         }
 
@@ -163,6 +191,8 @@ namespace MetasEternas
 
             for (int i = 1; i < linhas.Length; i++)
             {
+                if (string.IsNullOrWhiteSpace(linhas[i])) continue;
+
                 string[] partesTipo = linhas[i].Split(':');
                 string tipo = partesTipo[0];
                 string[] dados = partesTipo[1].Split(',');
@@ -170,13 +200,13 @@ namespace MetasEternas
                 switch (tipo)
                 {
                     case "MetaSimples":
-                        _metas.Add(new MetaSimples(dados[0], dados[1], dados[2], bool.Parse(dados[3])));
+                        _metas.Add(new MetaSimples(dados[0], dados[1], int.Parse(dados[2]), bool.Parse(dados[3])));
                         break;
                     case "MetaEterna":
-                        _metas.Add(new MetaEterna(dados[0], dados[1], dados[2]));
+                        _metas.Add(new MetaEterna(dados[0], dados[1], int.Parse(dados[2])));
                         break;
                     case "MetaDeListaDeTarefas":
-                        _metas.Add(new MetaDeListaDeTarefas(dados[0], dados[1], dados[2], int.Parse(dados[3]), int.Parse(dados[4]), int.Parse(dados[5])));
+                        _metas.Add(new MetaDeListaDeTarefas(dados[0], dados[1], int.Parse(dados[2]), int.Parse(dados[3]), int.Parse(dados[4]), int.Parse(dados[5])));
                         break;
                 }
             }

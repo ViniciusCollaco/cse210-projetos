@@ -14,5 +14,15 @@ namespace MonitoramentoExercicios
         {
             return (_numeroVoltas * 50.0) / 1000.0;
         }
+
+        public override double ObterVelocidade()
+        {
+            return (ObterDistancia() / ObterDuracaoMinutos()) * 60.0;
+        }
+
+        public override double ObterRitmo()
+        {
+            return ObterDuracaoMinutos() / ObterDistancia();
+        }
     }
 }
